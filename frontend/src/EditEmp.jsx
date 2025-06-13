@@ -37,16 +37,10 @@ function EditEmp() {
     .then(() => navigate('/'))
     .catch(err => console.log("Update failed:", err));
   };
-
-  const Back = (e) => {
+  const Back = (e) =>{
     e.preventDefault();
     navigate('/');
-  };
-
-  // Handlers without inline e =>
-  const handleAgeChange = ({ target: { value } }) => setAge(value);
-  const handleSalaryChange = ({ target: { value } }) => setSalary(value);
-
+  }
   return (
     <div className='d-flex vh-100 justify-content-center align-items-center bg-light'>
       <div className='w-50 bg-white rounded p-3 shadow'>
@@ -55,27 +49,27 @@ function EditEmp() {
 
           <div className='mb-3'>
             <label>Name</label>
-            <input type="text" className='form-control' value={name} onChange={e => setName(e.target.value)} required/>
+            <input type="text" className='form-control' value={name} onChange={(e) => setName(e.target.value)} required/>
           </div>
 
           <div className='mb-3'>
             <label>Email</label>
-            <input type="email" className='form-control' value={email} onChange={e => setEmail(e.target.value)} required/>
+            <input type="email" className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} required/>
           </div>
 
           <div className='mb-3'>
             <label>Age</label>
-            <input type="number" className='form-control' value={age} onChange={handleAgeChange} required min={18} max={65}/>
+            <input type="number" className='form-control' value={age} onChange={(e) => setAge(e.target.value)} required min={18} max={65}/>
           </div>
 
           <div className='mb-3'>
             <label>Role</label>
-            <input type="text" className='form-control' value={role} onChange={e => setRole(e.target.value)} required/>
+            <input type="text" className='form-control' value={role} onChange={(e) => setRole(e.target.value)} required/>
           </div>
 
           <div className='mb-3'>
             <label>Salary</label>
-            <input type="number" className='form-control' value={salary} onChange={handleSalaryChange} required min={0}/>
+            <input type="number" className='form-control' value={salary} onChange={(e) => setSalary(e.target.value)} required min={0}/>
           </div>
           <div className='d-flex gap-2'>
             <button className='btn btn-success' type="submit">Update</button>
