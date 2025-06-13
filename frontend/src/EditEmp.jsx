@@ -27,7 +27,7 @@ function EditEmp() {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    axios.put(`https://employee-crud-3.onrender.com/${id}`, {
+    axios.put(`https://employee-crud-3.onrender.com/update/${id}`, {
       name,
       email,
       age,
