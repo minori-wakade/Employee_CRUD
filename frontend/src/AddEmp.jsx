@@ -37,23 +37,23 @@ function AddEmp() {
           <h2>Add Employee</h2>
           <div className='mb-2'>
             <label>Name</label>
-            <input type="text" className='form-control' placeholder='Enter Name' onChange={(e) => setName(e.target.value)} />
+            <input type="text" className='form-control' placeholder='Enter Name' onChange={(e) => setName(e.target.value)} required/>
           </div>
           <div className='mb-2'>
             <label>Email</label>
-            <input type="email" className='form-control' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" className='form-control' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required/>
           </div>
           <div className='mb-2'>
             <label>Age</label>
-            <input type="number" className='form-control' placeholder='Enter Age' onChange={(e) => setAge(e.target.value)} />
+            <input type="number" className='form-control' placeholder='Enter Age' onChange={(e) => setAge(e.target.value)} required min={18} max={65}/>
           </div>
           <div className='mb-2'>
             <label>Role</label>
-            <input type="text" className='form-control' placeholder='Enter Role' onChange={(e) => setRole(e.target.value)} />
+            <input type="text" className='form-control' placeholder='Enter Role' onChange={(e) => setRole(e.target.value)} required/>
           </div>
           <div className='mb-2'>
             <label>Salary</label>
-            <input type="number" className='form-control' placeholder='Enter Salary' onChange={(e) => setSalary(e.target.value)} />
+            <input type="number" className='form-control' placeholder='Enter Salary' onChange={(e) => setSalary(e.target.value)} required min={0}/>
           </div>
           <div className='d-flex gap-2'>
             <button className='btn btn-success'>Submit</button>

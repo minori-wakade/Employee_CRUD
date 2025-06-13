@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Search from './Search';
 import axios from 'axios';
 import { Plus, Trash2, SquarePen } from 'lucide-react';
-
 function Employee() {
   const [employee, setEmployee] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -44,12 +43,13 @@ function Employee() {
             <Search onSearch={setSearchQuery} />
           </div>
 
-          <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3">
+          <div className="d-flex flex-row flex-wrap justify-content-between align-items-center mb-3">
             <h3 className="mb-2 mb-sm-0">Employee List</h3>
             <Link to="/create" className="btn btn-success d-flex align-items-center gap-2">
               <Plus size={18} /> Add
             </Link>
           </div>
+
 
           <div className="table-responsive rounded shadow mb-3">
             <table className="table table-hover mb-0">

@@ -1,11 +1,21 @@
 const mongoose = require('mongoose');
 
 const EmployeeSchema = new mongoose.Schema({
-  name:String,
-  email:String,
-  age:Number,
-  role:String,
-  salary:Number
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  age: {
+    type: Number,
+  },
+  role: {
+    type: String,
+  },
+  salary: {
+    type: Number,
+  }
 });
 
 const Employee = mongoose.model("Employee", EmployeeSchema);
