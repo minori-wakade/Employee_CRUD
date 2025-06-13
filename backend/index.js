@@ -5,6 +5,8 @@ const EmployeeModel = require("./models/Employee")
 require('dotenv').config();
 
 const app = express()
+const PORT = process.env.PORT || 3000;
+
 app.use(cors())
 app.use(express.json())
 
@@ -47,6 +49,6 @@ app.delete('/delete/:id', async (req, res) => {
 });
 
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     console.log("Server is running")
 })
