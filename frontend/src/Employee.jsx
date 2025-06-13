@@ -20,7 +20,7 @@ function Employee() {
 });
 
   useEffect(() => {
-    axios.get("http://localhost:3000/")
+    axios.get("https://employee-crud-3.onrender.com/")
       .then(res => setEmployee(res.data))
       .catch(err => console.error("Error fetching data:", err));
   }, []);
@@ -29,7 +29,7 @@ const handleDelete = (id) => {
   const confirmed = window.confirm("Are you sure you want to delete this employee?");
   if (!confirmed) return;
 
-  axios.delete(`http://localhost:3000/delete/${id}`)
+  axios.delete(`https://employee-crud-3.onrender.com/delete/${id}`)
     .then(res => {
       console.log("Employee deleted successfully");
       setEmployee(employee.filter(emp => emp._id !== id));

@@ -13,7 +13,7 @@ function AddEmp() {
 
   const Submit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/addEmployee", {
+    axios.post("https://employee-crud-3.onrender.com/addEmployee", {
       name,
       email,
       age,

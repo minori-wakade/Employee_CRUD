@@ -13,7 +13,7 @@ function EditEmp() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/${id}`)
+    axios.get(`https://employee-crud-3.onrender.com/${id}`)
       .then(res => {
         const emp = res.data;
         setName(emp.name);
@@ -27,7 +27,7 @@ function EditEmp() {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3000/update/${id}`, {
+    axios.put(`https://employee-crud-3.onrender.com/${id}`, {
       name,
       email,
       age,
