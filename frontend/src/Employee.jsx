@@ -51,8 +51,8 @@ function Employee() {
             </Link>
           </div>
 
-          <div className="table-responsive rounded shadow overflow-hidden mb-3">
-            <table className="table table-hover align-middle mb-0">
+          <div className="table-responsive rounded shadow mb-3">
+            <table className="table table-hover mb-0">
               <thead className="table-light">
                 <tr>
                   <th>Name</th>
@@ -100,11 +100,9 @@ function Employee() {
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
     </div>
   );
 }
-
 export default Employee;
