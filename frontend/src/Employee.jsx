@@ -30,31 +30,30 @@ function Employee() {
     if (!confirmed) return;
 
     axios.delete(`https://employee-crud-3.onrender.com/delete/${id}`)
-      .then(res => {
-        console.log("Employee deleted successfully");
+      .then(() => {
         setEmployee(employee.filter(emp => emp._id !== id));
       })
-      .catch(err => {
-        console.log("Error deleting employee:", err);
-      });
+      .catch(err => console.log("Error deleting employee:", err));
   };
 
   return (
-    <div className="container-fluid py-4 bg-light min-vh-100">
-      <div className="row justify-content-center">
-        <div className="col-12 col-lg-10">
-          <Search onSearch={setSearchQuery} />
+    <div className="container py-4 min-vh-100">
+      <div className="row justify-content-center mb-5">
+        <div className="col-12 col-lg-10 bg-white p-4 rounded shadow-sm">
+          <div className="mb-3">
+            <Search onSearch={setSearchQuery} />
+          </div>
 
-          <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3">
+          <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3">
             <h3 className="mb-2 mb-sm-0">Employee List</h3>
             <Link to="/create" className="btn btn-success d-flex align-items-center gap-2">
-              Add <Plus size={18} />
+              <Plus size={18} /> Add
             </Link>
           </div>
 
-          <div className="table-responsive">
-            <table className="table">
-              <thead className="table">
+          <div className="table-responsive rounded shadow overflow-hidden mb-3">
+            <table className="table table-hover align-middle mb-0">
+              <thead className="table-light">
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
@@ -65,31 +64,39 @@ function Employee() {
                 </tr>
               </thead>
               <tbody>
-                {filteredEmployees.map(emp => (
-                  <tr key={emp._id}>
-                    <td>{emp.name}</td>
-                    <td>{emp.email}</td>
-                    <td>{emp.age}</td>
-                    <td>{emp.role}</td>
-                    <td>{emp.salary}</td>
-                    <td>
-                      <div className="d-flex flex-wrap gap-2">
-                        <Link
-                          to={`/update/${emp._id}`}
-                          className="btn btn-primary d-flex align-items-center gap-2"
-                        >
-                          Edit <SquarePen size={18} />
-                        </Link>
-                        <button
-                          className="btn btn-danger d-flex align-items-center gap-2"
-                          onClick={() => handleDelete(emp._id)}
-                        >
-                          Delete <Trash2 size={18} />
-                        </button>
-                      </div>
+                {filteredEmployees.length > 0 ? (
+                  filteredEmployees.map(emp => (
+                    <tr key={emp._id}>
+                      <td>{emp.name}</td>
+                      <td>{emp.email}</td>
+                      <td>{emp.age}</td>
+                      <td>{emp.role}</td>
+                      <td>{emp.salary}</td>
+                      <td>
+                        <div className="d-flex align-items-center gap-2 flex-nowrap">
+                          <Link
+                            to={`/update/${emp._id}`}
+                            className="btn btn-primary d-flex align-items-center gap-1"
+                          >
+                            <SquarePen size={16} /> Edit
+                          </Link>
+                          <button
+                            className="btn btn-danger d-flex align-items-center gap-1"
+                            onClick={() => handleDelete(emp._id)}
+                          >
+                            <Trash2 size={16} /> Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center text-muted py-4">
+                      No employees found.
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
