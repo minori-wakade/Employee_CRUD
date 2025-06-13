@@ -68,8 +68,12 @@ const handleDelete = (id) => {
             <td>{emp.salary}</td>
         <td>
         <div className='d-flex gap-2'>
-          <Link to={`/update/${emp._id}`} className='btn btn-primary'>Edit <SquarePen /></Link>
-          <button className='btn btn-danger' onClick={() => handleDelete(emp._id)}>Delete <Trash2 /></button>
+          <Link to={`/update/${emp._id}`} className='btn btn-primary d-flex align-items-center gap-2'>
+            Edit <SquarePen size={18} />
+          </Link>
+          <button className='btn btn-danger d-flex align-items-center gap-2' onClick={() => handleDelete(emp._id)}>
+            Delete <Trash2 size={18} />
+          </button>
         </div>
       </td>
         </tr>
