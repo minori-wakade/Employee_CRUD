@@ -11,8 +11,15 @@ function AddEmp() {
 
   const navigate = useNavigate();
 
+  const nameRegex = /^[A-Za-z0-9\s]+$/;
+
   const Submit = (e) => {
     e.preventDefault();
+    if (!nameRegex.test(name)) {
+      alert("Invalid Name format");
+      return;
+    }
+
     axios.post("https://employee-crud-3.onrender.com/addEmployee", {
       name,
       email,
@@ -21,13 +28,12 @@ function AddEmp() {
       salary
     })
     .then(result => {
-      console.log(result);
       navigate('/');
     })
     .catch(err => {
       console.log("Full Error Response:", err.response);
       if (err.response && err.response.data && err.response.data.message) {
-        alert(err.response.data.message); 
+        alert(err.response.data.message);
       } else {
         alert("Something went wrong. Please try again.");
       }
@@ -44,26 +50,64 @@ function AddEmp() {
       <div className='w-50 bg-white rounded p-3 shadow'>
         <form onSubmit={Submit}>
           <h2>Add Employee</h2>
+
           <div className='mb-2'>
             <label>Name</label>
-            <input type="text" className='form-control' placeholder='Enter Name' onChange={(e) => setName(e.target.value)} required/>
+            <input
+              type="text"
+              className='form-control'
+              placeholder='Enter Name'
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
+
           <div className='mb-2'>
             <label>Email</label>
-            <input type="email" className='form-control' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} required/>
+            <input
+              type="email"
+              className='form-control'
+              placeholder='Enter Email'
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
+
           <div className='mb-2'>
             <label>Age</label>
-            <input type="number" className='form-control' placeholder='Enter Age' onChange={(e) => setAge(e.target.value)} min={18} max={65}/>
+            <input
+              type="number"
+              className='form-control'
+              placeholder='Enter Age'
+              onChange={(e) => setAge(e.target.value)}
+              min={18}
+              max={65}
+            />
           </div>
+
           <div className='mb-2'>
             <label>Role</label>
-            <input type="text" className='form-control' placeholder='Enter Role' onChange={(e) => setRole(e.target.value)} required/>
+            <input
+              type="text"
+              className='form-control'
+              placeholder='Enter Role'
+              onChange={(e) => setRole(e.target.value)}
+              required
+            />
           </div>
+
           <div className='mb-2'>
             <label>Salary</label>
-            <input type="number" className='form-control' placeholder='Enter Salary' onChange={(e) => setSalary(e.target.value)} required min={0}/>
+            <input
+              type="number"
+              className='form-control'
+              placeholder='Enter Salary'
+              onChange={(e) => setSalary(e.target.value)}
+              required
+              min={0}
+            />
           </div>
+
           <div className='d-flex gap-2'>
             <button className='btn btn-success'>Submit</button>
             <button className='btn btn-success' onClick={Back}>Back</button>

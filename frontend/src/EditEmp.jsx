@@ -12,6 +12,8 @@ function EditEmp() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const nameRegex = /^[A-Za-z0-9\s]+$/;
+
   useEffect(() => {
     axios.get(`https://employee-crud-3.onrender.com/${id}`)
       .then(res => {
@@ -27,6 +29,12 @@ function EditEmp() {
 
   const handleEdit = (e) => {
     e.preventDefault();
+
+    if (!nameRegex.test(name)) {
+      alert("Invalid Name Format");
+      return;
+    }
+
     axios.put(`https://employee-crud-3.onrender.com/update/${id}`, {
       name,
       email,
@@ -34,7 +42,9 @@ function EditEmp() {
       role,
       salary
     })
-    .then(() => navigate('/'))
+    .then(() => {
+      navigate('/');
+    })
     .catch(err => {
       console.error("Update failed:", err.response);
       if (err.response && err.response.data && err.response.data.message) {
@@ -58,27 +68,59 @@ function EditEmp() {
 
           <div className='mb-3'>
             <label>Name</label>
-            <input type="text" className='form-control' value={name} onChange={(e) => setName(e.target.value)} required/>
+            <input
+              type="text"
+              className='form-control'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
 
           <div className='mb-3'>
             <label>Email</label>
-            <input type="email" className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} required/>
+            <input
+              type="email"
+              className='form-control'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
           <div className='mb-3'>
             <label>Age</label>
-            <input type="number" className='form-control' value={age} onChange={(e) => setAge(e.target.value)} min={18} max={65}/>
+            <input
+              type="number"
+              className='form-control'
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              min={18}
+              max={65}
+            />
           </div>
 
           <div className='mb-3'>
             <label>Role</label>
-            <input type="text" className='form-control' value={role} onChange={(e) => setRole(e.target.value)} required/>
+            <input
+              type="text"
+              className='form-control'
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              required
+            />
           </div>
 
           <div className='mb-3'>
             <label>Salary</label>
-            <input type="number" className='form-control' value={salary} onChange={(e) => setSalary(e.target.value)} required min={0}/>
+            <input
+              type="number"
+              className='form-control'
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              required
+              min={0}
+            />
           </div>
 
           <div className='d-flex gap-2'>

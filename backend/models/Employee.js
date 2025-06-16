@@ -5,6 +5,7 @@ const EmployeeSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required:true,
+    match: [/^[A-Za-z0-9\s]+$/, 'Invalid Name format']
   },
   email: {
     type: String,
