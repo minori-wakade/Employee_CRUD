@@ -24,12 +24,21 @@ function AddEmp() {
       console.log(result);
       navigate('/');
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log("Full Error Response:", err.response);
+      if (err.response && err.response.data && err.response.data.message) {
+        alert(err.response.data.message); // Alert the user
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    });
   };
-  const Back = (e) =>{
+
+  const Back = (e) => {
     e.preventDefault();
     navigate('/');
   }
+
   return (
     <div className='d-flex vh-100 justify-content-center align-items-center'>
       <div className='w-50 bg-white rounded p-3 shadow'>
@@ -57,7 +66,7 @@ function AddEmp() {
           </div>
           <div className='d-flex gap-2'>
             <button className='btn btn-success'>Submit</button>
-            <button className='btn btn-success' onClick={Back}>Back</button>
+            <button className='btn btn-secondary' onClick={Back}>Back</button>
           </div>
         </form>
       </div>

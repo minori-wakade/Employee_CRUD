@@ -16,12 +16,22 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.error("MongoDB connection error:", err));
 
 
-app.post("/addEmployee",(req,res)=>{
-    EmployeeModel.create(req.body)
-    .then(employee=>res.json(employee))
-    .catch(err=>res.json(err))
+app.post("/addEmployee", async (req, res) => {
+  try {
+    const newEmployee = await EmployeeModel.create(req.body);
+    res.status(201).json(newEmployee);
+  } catch (err) {
+    console.error("❌ Error while adding employee:", err);  // <-- Add this line
 
-})
+    if (err.code === 11000) {
+      const field = Object.keys(err.keyPattern)[0];
+      res.status(400).json({ message: `Duplicate ${field}. It must be unique.` });
+    } else {
+      res.status(500).json({ message: "Server error", error: err });
+    }
+  }
+});
+
 app.get("/",(req,res)=>{
     EmployeeModel.find()
     .then(employee=>res.json(employee))
