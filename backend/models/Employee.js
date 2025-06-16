@@ -16,9 +16,11 @@ const EmployeeSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+    required:true,
   },
   salary: {
     type: Number,
+    required:true,
   }
 });
 

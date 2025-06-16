@@ -21,7 +21,7 @@ app.post("/addEmployee", async (req, res) => {
     const newEmployee = await EmployeeModel.create(req.body);
     res.status(201).json(newEmployee);
   } catch (err) {
-    console.error("❌ Error while adding employee:", err);  // <-- Add this line
+    console.error("Error while adding employee:", err); 
 
     if (err.code === 11000) {
       const field = Object.keys(err.keyPattern)[0];
@@ -44,8 +44,23 @@ app.get('/:id', async (req, res) => {
 });
 
 app.put('/update/:id', async (req, res) => {
-  await EmployeeModel.findByIdAndUpdate(req.params.id, req.body);
-  res.json({ message: 'Updated successfully' });
+  try {
+    const updatedEmp = await EmployeeModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true, context: 'query' }
+    );
+    res.json({ message: 'Updated successfully', updatedEmp });
+  } catch (err) {
+    console.error("Error while updating employee:", err);
+
+    if (err.code === 11000) {
+      const field = Object.keys(err.keyPattern)[0];
+      res.status(400).json({ message: `Duplicate ${field}. It must be unique.` });
+    } else {
+      res.status(500).json({ message: "Server error", error: err });
+    }
+  }
 });
 
 app.delete('/delete/:id', async (req, res) => {

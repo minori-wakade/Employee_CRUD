@@ -35,12 +35,21 @@ function EditEmp() {
       salary
     })
     .then(() => navigate('/'))
-    .catch(err => console.log("Update failed:", err));
+    .catch(err => {
+      console.error("Update failed:", err.response);
+      if (err.response && err.response.data && err.response.data.message) {
+        alert(err.response.data.message);
+      } else {
+        alert("Something went wrong while updating. Please try again.");
+      }
+    });
   };
-  const Back = (e) =>{
+
+  const Back = (e) => {
     e.preventDefault();
     navigate('/');
   }
+
   return (
     <div className='d-flex vh-100 justify-content-center align-items-center bg-light'>
       <div className='w-50 bg-white rounded p-3 shadow'>
@@ -71,6 +80,7 @@ function EditEmp() {
             <label>Salary</label>
             <input type="number" className='form-control' value={salary} onChange={(e) => setSalary(e.target.value)} required min={0}/>
           </div>
+
           <div className='d-flex gap-2'>
             <button className='btn btn-success' type="submit">Update</button>
             <button className='btn btn-success' onClick={Back}>Back</button>

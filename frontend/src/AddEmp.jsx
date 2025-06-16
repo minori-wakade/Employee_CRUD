@@ -27,7 +27,7 @@ function AddEmp() {
     .catch(err => {
       console.log("Full Error Response:", err.response);
       if (err.response && err.response.data && err.response.data.message) {
-        alert(err.response.data.message); // Alert the user
+        alert(err.response.data.message); 
       } else {
         alert("Something went wrong. Please try again.");
       }
@@ -66,7 +66,7 @@ function AddEmp() {
           </div>
           <div className='d-flex gap-2'>
             <button className='btn btn-success'>Submit</button>
-            <button className='btn btn-secondary' onClick={Back}>Back</button>
+            <button className='btn btn-success' onClick={Back}>Back</button>
           </div>
         </form>
       </div>
