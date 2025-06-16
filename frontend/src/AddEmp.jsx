@@ -54,7 +54,7 @@ function AddEmp() {
           </div>
           <div className='mb-2'>
             <label>Age</label>
-            <input type="number" className='form-control' placeholder='Enter Age' onChange={(e) => setAge(e.target.value)} required min={18} max={65}/>
+            <input type="number" className='form-control' placeholder='Enter Age' onChange={(e) => setAge(e.target.value)} min={18} max={65}/>
           </div>
           <div className='mb-2'>
             <label>Role</label>

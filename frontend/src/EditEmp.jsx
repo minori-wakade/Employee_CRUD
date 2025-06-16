@@ -68,7 +68,7 @@ function EditEmp() {
 
           <div className='mb-3'>
             <label>Age</label>
-            <input type="number" className='form-control' value={age} onChange={(e) => setAge(e.target.value)} required min={18} max={65}/>
+            <input type="number" className='form-control' value={age} onChange={(e) => setAge(e.target.value)} min={18} max={65}/>
           </div>
 
           <div className='mb-3'>
