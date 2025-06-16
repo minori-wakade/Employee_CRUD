@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import SortableHeader from './SortableHeader';
 import axios from 'axios';
 import { Plus, Trash2, SquarePen } from 'lucide-react';
+
 function Employee() {
   const [employee, setEmployee] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   const filteredEmployees = employee.filter(emp => {
     const query = searchQuery.trim().toLowerCase();
@@ -35,6 +38,26 @@ function Employee() {
       .catch(err => console.log("Error deleting employee:", err));
   };
 
+  const sortEmployees = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+
+    const sorted = [...employee].sort((a, b) => {
+      if (typeof a[key] === 'number') {
+        return direction === 'asc' ? a[key] - b[key] : b[key] - a[key];
+      } else {
+        return direction === 'asc'
+          ? a[key]?.localeCompare(b[key])
+          : b[key]?.localeCompare(a[key]);
+      }
+    });
+
+    setEmployee(sorted);
+    setSortConfig({ key, direction });
+  };
+
   return (
     <div className="container py-4 min-vh-100">
       <div className="row justify-content-center mb-5">
@@ -50,16 +73,30 @@ function Employee() {
             </Link>
           </div>
 
-
           <div className="table-responsive rounded shadow mb-3">
             <table className="table table-hover mb-0">
               <thead className="table-light">
                 <tr>
-                  <th>Name</th>
+                  <SortableHeader
+                    label="Name"
+                    columnKey="name"
+                    sortConfig={sortConfig}
+                    onSort={sortEmployees}
+                  />
                   <th>Email</th>
-                  <th>Age</th>
+                  <SortableHeader
+                    label="Age"
+                    columnKey="age"
+                    sortConfig={sortConfig}
+                    onSort={sortEmployees}
+                  />
                   <th>Role</th>
-                  <th>Salary</th>
+                  <SortableHeader
+                    label="Salary"
+                    columnKey="salary"
+                    sortConfig={sortConfig}
+                    onSort={sortEmployees}
+                  />
                   <th>Action</th>
                 </tr>
               </thead>
@@ -105,4 +142,5 @@ function Employee() {
     </div>
   );
 }
+
 export default Employee;

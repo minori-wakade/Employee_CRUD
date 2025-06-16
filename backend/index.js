@@ -15,7 +15,6 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("MongoDB connected successfully"))
 .catch(err => console.error("MongoDB connection error:", err));
 
-
 app.post("/addEmployee", async (req, res) => {
   try {
     const newEmployee = await EmployeeModel.create(req.body);
@@ -72,7 +71,6 @@ app.delete('/delete/:id', async (req, res) => {
     res.status(500).send("Error deleting employee");
   }
 });
-
 
 app.listen(PORT,()=>{
     console.log("Server is running")
